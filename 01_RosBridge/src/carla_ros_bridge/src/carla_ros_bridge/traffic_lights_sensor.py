@@ -51,11 +51,11 @@ class TrafficLightsSensor(PseudoActor):
 
         self.traffic_lights_info_publisher = node.new_publisher(
             CarlaTrafficLightInfoList,
-            self.get_topic_prefix() + "/info",
+            "/carla/traffic_light/info",
             qos_profile=QoSProfile(depth=10, durability=DurabilityPolicy.TRANSIENT_LOCAL))
         self.traffic_lights_status_publisher = node.new_publisher(
             CarlaTrafficLightStatusList,
-            self.get_topic_prefix() + "/status",
+            "/carla/traffic_light/status",
             qos_profile=QoSProfile(depth=10, durability=DurabilityPolicy.TRANSIENT_LOCAL))
 
     def destroy(self):

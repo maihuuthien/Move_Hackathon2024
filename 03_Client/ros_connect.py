@@ -44,7 +44,7 @@ class RosConnect():
         rospy.Subscriber('/carla/hero/vehicle_toggle_FL_door', Int32, self.toggle_FL_door)
         rospy.Subscriber('/carla/hero/vehicle_toggle_RR_door', Int32, self.toggle_RR_door)
         rospy.Subscriber('/carla/hero/vehicle_toggle_RL_door', Int32, self.toggle_RL_door)
-        rospy.Subscriber('/carla/129/129/status', CarlaTrafficLightStatusList, self.get_traffic_status)
+        rospy.Subscriber('/carla/traffic_light/status', CarlaTrafficLightStatusList, self.get_traffic_status)
 
     def toggle_FR_door(self, msg):
         if (msg.data):
@@ -62,10 +62,9 @@ class RosConnect():
         if (msg.data):
             self.vehicle_controller.toggle_RL_door()
 
-    
     def get_traffic_light_info(self):
         msg = rospy.wait_for_message(
-            "/carla/129/129/info", CarlaTrafficLightInfoList, timeout=20)
+            "/carla/traffic_light/info", CarlaTrafficLightInfoList, timeout=10)
         self.traffic_light_info = msg
 
     def set_obstacle(self, obstacle_actor, obstacle_distance):

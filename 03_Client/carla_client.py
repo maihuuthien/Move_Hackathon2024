@@ -61,7 +61,7 @@ class CarlaClient():
             world_carla = client.get_world()
             display = pygame.display.set_mode(
             # (1840, 1080),
-            (1600, 800),
+            (1500, 800),
             pygame.HWSURFACE | pygame.DOUBLEBUF)
             self.vehicle_controller.create_car(world_carla)
             hud = HUD(1500, 800, self.ros_connection)
