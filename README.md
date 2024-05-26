@@ -5,6 +5,9 @@ Before run Framework, sure that you installed ROS1 and Carla.
 Step1: Build ros package 02_RosCommunication -> source to this package
 
 Step2: Build ros package 01_RosBridge -> source to this package.
+
+For Carla has different version (not 0.9.13), you must change this in 01_RosBridge/src/carla_ros_bridge/src/carla_ros_bridge/CARLA_VERSION file. Then build again.
+
 ## Start:
 Launch Carla server.
 
