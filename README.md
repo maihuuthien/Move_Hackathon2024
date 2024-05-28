@@ -1,5 +1,5 @@
 # #Move-Hackathon2024
-Before run Framework, sure that you installed ROS (Noetic) and Carla (version > 0.9.13).
+Before run Framework, sure that you installed ROS (Noetic) and Carla (version >= 0.9.13).
 
 # Initial
 Step1: Build ros package 02_RosCommunication -> source to this package (run devel\setup.bat to link packet with terminal)
