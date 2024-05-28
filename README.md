@@ -15,15 +15,15 @@ For Carla has different version (not 0.9.13), you must change this in 01_RosBrid
 
 3. Ros Terminal 1 (Ros Bridge):
     
-    roslaunch carla_ros_bridge carla_ros_bridge.launch
+        roslaunch carla_ros_bridge carla_ros_bridge.launch
 
 4. Ros Terminal 2 (Client):
     
-    python /03_Client/main.py
+        python /03_Client/main.py
     
 5. Ros Terminal 3 (Dev code):
    
-    python /04_Template/main.py
+        python /04_Template/main.py
 
 ## Move API:
 
