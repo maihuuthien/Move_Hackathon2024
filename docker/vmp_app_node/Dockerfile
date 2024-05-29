@@ -4,4 +4,4 @@ WORKDIR ${VMP_ROOT}
 
 COPY ./04_Template ./04_Template
 
-CMD [ "python3", "./04_Template/main.py" ]
+CMD [ "python3", "-u", "./04_Template/main.py" ]
