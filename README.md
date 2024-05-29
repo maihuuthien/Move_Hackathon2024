@@ -58,4 +58,4 @@ To gracefully stop and remove all docker containers, open another terminal at th
 docker compose down
 ```
 
-> **Note:** It is also recommended to kill CARLA server everytime for a clean start.
+> **Note:** It is also recommended to kill CARLA server every time for a clean start.
