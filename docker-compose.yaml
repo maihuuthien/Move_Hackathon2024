@@ -30,8 +30,6 @@ services:
     depends_on:
       bridge:
         condition: service_started
-    healthcheck:
-      test: ["CMD", "source /opt/ros/noetic/setup.bash && rosnode ping /park_vehithrottlecle"]
 
   vmp-app:
     build:
@@ -44,4 +42,4 @@ services:
       - DISPLAY=host.docker.internal:0.0
     depends_on:
       client:
-        condition: service_healthy
+        condition: service_started

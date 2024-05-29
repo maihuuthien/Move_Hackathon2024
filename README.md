@@ -1,34 +1,61 @@
 # #Move-Hackathon2024
-Before run Framework, sure that you installed ROS (Noetic) and Carla (version >= 0.9.13).
 
-# Initial
-Step1: Build ros package 02_RosCommunication -> source to this package (run devel\setup.bat to link packet with terminal)
+## 1. Dev Environment Setup
 
-Step2: In the same terminal, build ros package 01_RosBridge -> source to this package (this source step is important, need do this first at any terminal).
+**Prerequisites:** Laptop or PC with *NVIDIA* graphics card
 
-For Carla has different version (not 0.9.13), you must change this in 01_RosBridge/src/carla_ros_bridge/src/carla_ros_bridge/CARLA_VERSION file. Then build again.
+### 1.1. Tested: Windows 10/11 WSL2 Ubuntu-20.04
 
-## Start:
-1. Launch Carla server.
+- [[Windows] CARLA_0.9.13.zip](https://carla-releases.s3.us-east-005.backblazeb2.com/Windows/CARLA_0.9.13.zip)
+- Docker Desktop ( tested at v4.27.2 )
+- Docker Compose ( tested at v2.24.5 )
 
-2. Make sure you source to ros package at step 2 in all Ros Terminal.
+### 1.2. Untested: Ubuntu 20.04.6 LTS (Focal Fossa)
 
-3. Ros Terminal 1 (Ros Bridge):
-    
-        roslaunch carla_ros_bridge carla_ros_bridge.launch
+> **Note:** To be verified
 
-4. Ros Terminal 2 (Client):
-    
-        python /03_Client/main.py
-    
-5. Ros Terminal 3 (Dev code):
-   
-        python /04_Template/main.py
+## 2. Run the Challenge
 
-## Move API:
+First, you'll need to pull the base image:
 
-You can get template in /04_Template
+```
+docker pull osrf/ros:noetic-desktop-focal
+```
 
-## Link support debug:
+Next, clone this Git repository and `cd` into the folder, then
 
-    https://drive.google.com/drive/folders/1jWq_q5UNM6qG1bJA6EwZWt8-pFcCHXVC
+```
+docker compose build
+```
+
+Now, on your host, you need to launch the CARLA simulator. Inside the downloaded package you should find an executable called `CarlaUE4.exe`:
+
+```
+CarlaUE4.exe
+```
+
+> **Note:** Launch `CarlaUE4.sh` instead if you're on Ubuntu.
+
+You should see some nice rendering by now. Go on, have fun navigating around by your mouse and keyboard (`W`, `A`, `S`, `D`, `Q`, `E`).
+
+![CarlaUE4 simulator started](./doc/images/carla_started.png)
+
+Now, go back to your terminal at this repo, simply call:
+
+```
+docker compose up
+```
+
+and you shall see the challenge running.
+
+![Game started](./doc/images/pygame_started.png)
+
+> **Note:** If you don't need the first CARLA simulator window, you can run `CarlaUE4.exe -RenderOffScreen` instead, but then don't forget to kill it with Task Manager later.
+
+To gracefully stop and remove all docker containers, open another terminal at this repo and:
+
+```
+docker compose down
+```
+
+> **Note:** It is also recommended to kill CARLA server everytime for a clean start.
