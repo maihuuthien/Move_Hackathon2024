@@ -13,7 +13,7 @@ services:
     privileged: true
     environment:
       - DISPLAY=host.docker.internal:0.0
-    command: roslaunch carla_ros_bridge carla_ros_bridge.launch host:=host.docker.internal port:=2000 timeout:=5
+    command: roslaunch carla_ros_bridge carla_ros_bridge.launch host:=host.docker.internal port:=2000 timeout:=10
     restart: always
 
   client:
