@@ -50,6 +50,14 @@ and you shall see the challenge running.
 
 ![Game started](./doc/images/pygame_started.png)
 
+You can drive the car around using the keyboard:
+- `Q`: to shift gear
+- `W`: to hit the throttle
+- `S`: to hit the brake
+- `A`: to steer left
+- `D`: to steer right
+- `Tab`: to change view
+
 > **Note:** If you don't need the first CARLA simulator window, you can run `CarlaUE4.exe -RenderOffScreen` instead, but then don't forget to kill it with Task Manager later.
 
 To gracefully stop and remove all docker containers, open another terminal at this repo and:
@@ -59,3 +67,19 @@ docker compose down
 ```
 
 > **Note:** It is also recommended to kill CARLA server every time for a clean start.
+
+## 3. Troubleshooting
+
+### 3.1. Pygame window is not showing
+
+After running `docker compose up`, if you're seeing the log like this:
+
+![Docker compose up](./doc/images/docker_compose_up.png)
+
+then you can be confident that everything is working well. However, if the `pygame` window is not showing, then you'll need to install an **X-server** on the Windows host, following this [guide](https://gist.github.com/Mluckydwyer/8df7782b1a6a040e5d01305222149f3c#2-window-server).
+
+> **Note:** You might not need those two `export` commands at the end though.
+
+### 3.2. Pygame window is closed after some keyboard interaction
+
+Make sure you're using an English keyboard layout. :)
