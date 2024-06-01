@@ -33,7 +33,7 @@ services:
       bridge:
         condition: service_started
     healthcheck:
-      test: echo 0
+      test: echo 0  # TODO: need better check here, e.g. `rostopic echo` or `rosnode ping`
       interval: 30s
       timeout: 30s
       retries: 2
