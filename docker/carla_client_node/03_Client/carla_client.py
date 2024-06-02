@@ -78,19 +78,16 @@ class CarlaClient():
                 self.ros_connection.publish_status()
                 self.ros_connection.publish_obstacle_distance()
                 self.ros_connection.publish_traffic_sign_info()
+                # self.scenario_runner.counting_stop_point(self.vehicle_controller.vehicle)
                 # self.ros_connection.keep_topic_alive()
                 if (self.scenario_runner.is_vehicle_in_weather_area_1(self.vehicle_controller.vehicle)):
                     # if (world_carla.get_weather() != carla.WeatherParameters.ClearNight):
                     self.ros_connection.set_weather("ClearNight")
                     world_carla.set_weather(carla.WeatherParameters.ClearNight)
-                elif (self.scenario_runner.is_vehicle_in_weather_area_2(self.vehicle_controller.vehicle)):
-                    # if (world_carla.get_weather() != carla.WeatherParameters.CloudyNoon):
-                    self.ros_connection.set_weather("CloudyNoon")
-                    world_carla.set_weather(carla.WeatherParameters.CloudyNoon) 
                 else:
                     # if (world_carla.get_weather() != carla.WeatherParameters.Default):
                     world_carla.set_weather(carla.WeatherParameters.Default)
-                    self.ros_connection.set_weather("Default")
+                    self.ros_connection.set_weather("ClearDay")
 
                 if controller.parse_events(world, clock, self.vehicle_controller.vehicle, world_carla):
                     return
