@@ -5,8 +5,6 @@ import time
 
 import rospy
 import carla
-import json
-import math
 from carla_msgs.msg import CarlaWorldInfo
 
 from vehicle_control import Vehicle_Control
@@ -19,6 +17,7 @@ from vehicle_motion import World
 from vehicle_motion import DualControl
 
 import pygame
+
 
 class CarlaClient():
     """
@@ -51,7 +50,7 @@ class CarlaClient():
 
         rospy.loginfo('Step 0 - Set up scenarios DONE')
         time.sleep(2)
-    
+
     def manual_control_with_func(self):
         pygame.init()
         pygame.font.init()
@@ -95,15 +94,15 @@ class CarlaClient():
                 # self.vehicle_controller.vehicle_control_with_latency_and_error(self._throttle, self._steer, self._brake, self._reverse, self._hand_brake, self.manual_gear_shift, self.gear)
                 if (not self.release_control):
                     self.ros_connection.vehicle_control_with_ros(self._throttle, self._steer, self._brake, self._reverse, self._hand_brake, self.manual_gear_shift, self.gear)
-                if (self.is_traffic_1 == False and self.scenario_runner.is_vehicle_in_traffic_area_1(self.vehicle_controller.vehicle) and self.ros_connection.tfl_134_status == 0):
+                if (self.is_traffic_1 is False and self.scenario_runner.is_vehicle_in_traffic_area_1(self.vehicle_controller.vehicle) and self.ros_connection.tfl_134_status == 0):
                     hud.notification("Cross the red traffic light => score - 1")
                     hud.minus_score(1)
-                    hud.crossRTL+=1
+                    hud.crossRTL += 1
                     self.is_traffic_1 = True
-                elif (self.is_traffic_1 == False and self.scenario_runner.is_vehicle_in_traffic_area_1(self.vehicle_controller.vehicle) and self.ros_connection.tfl_134_status == 1):
+                elif (self.is_traffic_1 is False and self.scenario_runner.is_vehicle_in_traffic_area_1(self.vehicle_controller.vehicle) and self.ros_connection.tfl_134_status == 1):
                     hud.notification("Cross the yellow traffic light")
                     self.is_traffic_1 = True
-                elif (self.is_traffic_1 == False and self.scenario_runner.is_vehicle_in_traffic_area_1(self.vehicle_controller.vehicle) and self.ros_connection.tfl_134_status == 2):
+                elif (self.is_traffic_1 is False and self.scenario_runner.is_vehicle_in_traffic_area_1(self.vehicle_controller.vehicle) and self.ros_connection.tfl_134_status == 2):
                     hud.notification("Cross the green traffic light")
                     self.is_traffic_1 = True
                 """ This place end for application code """
