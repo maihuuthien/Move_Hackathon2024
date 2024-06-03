@@ -2,9 +2,11 @@
 
 import os
 import time
+import numpy as np
 
 import rospy
 import carla
+import math
 from carla_msgs.msg import CarlaWorldInfo
 
 from vehicle_control import Vehicle_Control
@@ -60,15 +62,31 @@ class CarlaClient():
                 os.environ["CARLA_HOST"],
                 int(os.environ["CARLA_PORT"])
             )
-            client.set_timeout(2.0)
-            world_carla = client.get_world()
+            client.set_timeout(5.0)
+
+            carla_as_main_window = int(os.environ["CARLA_MAIN"])
+            display_width = 250 if carla_as_main_window else 1500
+            display_height = 350 if carla_as_main_window else 800
             display = pygame.display.set_mode(
-                # (1840, 1080),
-                (1500, 800),
+                (display_width, display_height),
                 pygame.HWSURFACE | pygame.DOUBLEBUF
             )
+
+            world_carla = client.get_world()
+            spectator = world_carla.get_spectator()
             self.vehicle_controller.create_car(world_carla)
-            hud = HUD(1500, 800, self.ros_connection)
+            if carla_as_main_window:
+                dummy_sensor = world_carla.spawn_actor(
+                    world_carla.get_blueprint_library().find('sensor.other.gnss'),
+                    carla.Transform(
+                        carla.Location(x=-5.5, z=2.8),
+                        carla.Rotation(pitch=-15.)
+                    ),
+                    attach_to=self.vehicle_controller.vehicle,
+                    attachment_type=carla.AttachmentType.Rigid
+                )
+
+            hud = HUD(display_width, display_height, self.ros_connection)
             self.ros_connection.take_hud(hud)
             world = World(world_carla, hud, 'vehicle.*', self.vehicle_controller.vehicle, self.ros_connection)
             controller = DualControl(self, hud)
@@ -104,6 +122,19 @@ class CarlaClient():
                 if (not self.release_control):
                     self.ros_connection.vehicle_control_with_ros(self._throttle, self._steer, self._brake, self._reverse, self._hand_brake, self.manual_gear_shift, self.gear)
                 """ This place end for application code """
+
+                if carla_as_main_window:
+                    ego_trans = self.vehicle_controller.vehicle.get_transform()
+                    spectator.set_transform(
+                        dummy_sensor.get_transform()
+                        if world.camera_manager.transform_index % 2
+                        else (
+                            carla.Transform(
+                                ego_trans.location + carla.Location(z=2.8),
+                                ego_trans.rotation
+                            )
+                        )
+                    )
 
                 world.tick(clock)
                 world.render(display)
