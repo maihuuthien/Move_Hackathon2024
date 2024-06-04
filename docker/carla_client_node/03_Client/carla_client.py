@@ -65,8 +65,8 @@ class CarlaClient():
             client.set_timeout(5.0)
 
             carla_as_main_window = int(os.environ["CARLA_MAIN"])
-            display_width = 250 if carla_as_main_window else 1500
-            display_height = 350 if carla_as_main_window else 800
+            display_width = 300 if carla_as_main_window else 1500
+            display_height = 400 if carla_as_main_window else 800
             display = pygame.display.set_mode(
                 (display_width, display_height),
                 pygame.HWSURFACE | pygame.DOUBLEBUF

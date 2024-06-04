@@ -384,7 +384,7 @@ class HUD(object):
 
     def render(self, display):
         if self._show_info:
-            info_surface = pygame.Surface((260, self.dim[1]))
+            info_surface = pygame.Surface((300, self.dim[1]))
             info_surface.set_alpha(100)
             display.blit(info_surface, (0, 0))
             v_offset = 4
